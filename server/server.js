@@ -12,10 +12,13 @@ const newsRoute = require("./router/news-router");
 require("./controllers/news-controller");
 const {updateNews} = require("./controllers/news-controller");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://mern-quizy-frontend.onrender.com"
+    ],
     methods: "GET, POST, PUT, PATCH, HEAD, DELETE",
     credentials: true
 }
