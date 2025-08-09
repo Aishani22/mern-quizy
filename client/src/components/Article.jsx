@@ -8,13 +8,15 @@ const Article  = ({urlToImage, title, description, url, publishedAt, source}) =>
     const [news, setNews] = useState([]);
     const [articles, setArticles] = useState([]);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
       const fetchNews = async () => {
           try {
               const responses = await Promise.all(
                   categories.map(async (category) => {
                       // const encodedTopic = encodeURIComponent(topic);
-                      const res = await axios.get(`http://localhost:3000/api/news/getNews?category=${category}&limit=5`);
+                      const res = await axios.get(`${apiUrl}/api/news/getNews?category=${category}&limit=5`);
                       return res.data.length > 0 ? res.data : [];
                   })
               );

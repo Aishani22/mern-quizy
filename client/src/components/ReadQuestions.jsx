@@ -14,10 +14,12 @@ const ReadQuestions = () => {
     const [questions, setQuestions] = useState([]);
     const [index, setIndex] = useState(0);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     let value = 0;
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/questions/getQuestions?category=${category}&limit=30`)
+        axios.get(`${apiUrl}/api/questions/getQuestions?category=${category}&limit=30`)
             .then((res) => {
                 setQuestions(res.data);
                 console.log(res.data);

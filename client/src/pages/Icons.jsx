@@ -8,9 +8,12 @@ const Icons = () => {
     const location = useLocation();
     const {user} = location.state;
     const {token} = location.state;
+
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleClick = async (iconPath) => {
         try{
-            const response = await fetch(`http://localhost:3000/api/auth/setIcon`, {
+            const response = await fetch(`${apiUrl}/api/auth/setIcon`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json",
                     // Authorization: `Bearer ${token}`,

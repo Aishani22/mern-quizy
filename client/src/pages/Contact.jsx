@@ -34,10 +34,12 @@ const Contact = () => {
         })
     }
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`http://localhost:3000/api/form/contact`, {
+            const response = await fetch(`${apiUrl}/api/form/contact`, {
                 method: "POST", 
                 headers: {
                     "Content-Type" : "application/json"

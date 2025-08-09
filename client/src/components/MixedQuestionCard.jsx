@@ -27,6 +27,8 @@ const MixedQuestionCard = () => {
     const [checkedArray, setCheckedArray] = useState(new Array(10).fill(false)); // Stores check state for each question
     const [clickedOptions, setClickedOptions] = useState(Array(10).fill(new Array(4).fill(0))); // Stores clicked options
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const topics = ["Music", "Sport & Leisure", "Film & TV", "Arts & Literature", "History", "Society & Culture", "Science", "Geography", "Food & Drink", "General Knowledge"]
     let value = 0;
 
@@ -36,7 +38,7 @@ const MixedQuestionCard = () => {
                 const responses = await Promise.all(
                     topics.map(async (topic) => {
                         const encodedTopic = encodeURIComponent(topic);
-                        const res = await axios.get(`http://localhost:3000/api/questions/getQuestions?category=${encodedTopic}&limit=1`);
+                        const res = await axios.get(`${apiUrl}/api/questions/getQuestions?category=${encodedTopic}&limit=1`);
                         return res.data.length > 0 ? res.data[0] : null; 
                     })
                 );

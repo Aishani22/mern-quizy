@@ -22,10 +22,12 @@ export const AuthProvider = ({children}) => {
         return localStorage.removeItem('token');
     }
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     //JWT AUTHENTICATION - to get currently loggedIN user data
     const userAuthentication = async () => {
         try{
-            const response = await fetch("http://localhost:3000/api/auth/user", 
+            const response = await fetch(`${apiUrl}/api/auth/user`, 
                 {
                     method: "GET",
                     headers: {

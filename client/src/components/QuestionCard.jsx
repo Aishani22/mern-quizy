@@ -28,10 +28,12 @@ const QuestionCard = () => {
     const [checkedArray, setCheckedArray] = useState(new Array(10).fill(false)); // Stores check state for each question
     const [clickedOptions, setClickedOptions] = useState(Array(10).fill(new Array(4).fill(0))); // Stores clicked options
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     let value = 0;
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/questions/getQuestions?category=${category}&limit=10`)
+        axios.get(`${apiUrl}/api/questions/getQuestions?category=${category}&limit=10`)
             .then((res) => {
                 setQuestions(res.data);
                 // console.log(res.data);
