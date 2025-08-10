@@ -41,3 +41,4 @@ connectDb().then(async () => {
         console.log(`Server is running at port ${PORT}`);
     })
 });
+
