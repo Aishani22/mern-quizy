@@ -4,6 +4,7 @@ import { useAuth } from "../store/auth";
 import { use } from "react";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router";
+import { useLoader } from "./LoaderContext";
 
 const Login = () => {
 
@@ -11,6 +12,8 @@ const Login = () => {
         email: "",
         password: "",
     });
+
+    const { showLoader, hideLoader } = useLoader();
 
     const navigate = useNavigate();
     const {storeTokenInLS} = useAuth();
@@ -32,6 +35,7 @@ const Login = () => {
         e.preventDefault();
         console.log(user);
         try{
+            showLoader();
             const response = await fetch(`${apiUrl}/api/auth/login`, {
                 method: "POST",
                 headers: {
@@ -58,6 +62,9 @@ const Login = () => {
         catch(error) {
             console.log(error);
         } 
+        finally{
+            hideLoader();
+        }
     }
 
     return (

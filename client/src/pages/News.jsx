@@ -1,17 +1,19 @@
 import Article from "../components/Article";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLoader } from "./LoaderContext";
 
 const News = () => {
 
     const categories = ["business", "entertainment", "general", "health", "science", "sports", "technology"];
     const [news, setNews] = useState([]);
-
+    const { showLoader, hideLoader } = useLoader();
     const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
+                showLoader();
                 const responses = await Promise.all(
                     categories.map(async (category) => {
                         // const encodedTopic = encodeURIComponent(topic);
@@ -26,6 +28,9 @@ const News = () => {
                 console.log("Fetched News:", fetchedNews);
             } catch (err) {
                 console.error("Error fetching news:", err);
+            }
+            finally{
+                hideLoader();
             }
         };
     

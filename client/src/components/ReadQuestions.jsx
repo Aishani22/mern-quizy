@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { use } from "react";
+import { useLoader } from "../pages/LoaderContext";
 
 const ReadQuestions = () => {
     const location = useLocation();
@@ -10,7 +11,7 @@ const ReadQuestions = () => {
     const decodedCategory = decodeURIComponent(category);
     const { imageBg } = location.state;
     const navigate = useNavigate();
-
+    const { showLoader, hideLoader } = useLoader();
     const [questions, setQuestions] = useState([]);
     const [index, setIndex] = useState(0);
 
@@ -19,12 +20,14 @@ const ReadQuestions = () => {
     let value = 0;
 
     useEffect(() => {
+        showLoader();
         axios.get(`${apiUrl}/api/questions/getQuestions?category=${category}&limit=30`)
             .then((res) => {
                 setQuestions(res.data);
                 console.log(res.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(() => hideLoader());
     }, [category]);
 
     useEffect(() => {

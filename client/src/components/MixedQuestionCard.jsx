@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { use } from "react";
+import { useLoader } from "../pages/LoaderContext";
 
 const MixedQuestionCard = () => {
     const location = useLocation();
@@ -28,13 +29,14 @@ const MixedQuestionCard = () => {
     const [clickedOptions, setClickedOptions] = useState(Array(10).fill(new Array(4).fill(0))); // Stores clicked options
 
     const apiUrl = import.meta.env.VITE_API_URL;
-
+    const { showLoader, hideLoader } = useLoader();
     const topics = ["Music", "Sport & Leisure", "Film & TV", "Arts & Literature", "History", "Society & Culture", "Science", "Geography", "Food & Drink", "General Knowledge"]
     let value = 0;
 
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
+                showLoader();
                 const responses = await Promise.all(
                     topics.map(async (topic) => {
                         const encodedTopic = encodeURIComponent(topic);
@@ -49,6 +51,9 @@ const MixedQuestionCard = () => {
                 console.log("Fetched Questions:", fetchedQuestions);
             } catch (err) {
                 console.error("Error fetching questions:", err);
+            }
+            finally{
+                hideLoader();
             }
         };
     

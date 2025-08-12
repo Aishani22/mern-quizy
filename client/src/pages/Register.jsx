@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router";
+import { useLoader } from "./LoaderContext";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -13,6 +14,8 @@ const Register = () => {
     password: "",
     confirm_password: "",
   });
+
+  const { showLoader, hideLoader } = useLoader();
 
   const navigate = useNavigate();
   const { storeTokenInLS } = useAuth();
@@ -27,6 +30,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      showLoader();
       const response = await fetch(`${apiUrl}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -50,6 +54,9 @@ const Register = () => {
       }
     } catch (error) {
       console.error(error);
+    }
+    finally{
+      hideLoader();
     }
   };
 

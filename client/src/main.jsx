@@ -4,11 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from './store/auth.jsx'
 import {ToastContainer} from "react-toastify"
+import {LoaderProvider} from "./pages/LoaderContext.jsx"
 
 createRoot(document.getElementById('root')).render(
   <AuthProvider>
-    <StrictMode>
-      <App />
+      <StrictMode>
+        <LoaderProvider>
+          <App />
+        </LoaderProvider>
       <ToastContainer
         position="top-right"
         autoClose={3000}

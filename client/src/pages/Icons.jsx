@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import { toast } from "react-toastify";
+import { useLoader } from "./LoaderContext";
 
 const Icons = () => {
 
@@ -8,11 +9,12 @@ const Icons = () => {
     const location = useLocation();
     const {user} = location.state;
     const {token} = location.state;
-
+    const { showLoader, hideLoader } = useLoader();
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleClick = async (iconPath) => {
         try{
+            showLoader();
             const response = await fetch(`${apiUrl}/api/auth/setIcon`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json",
@@ -31,6 +33,9 @@ const Icons = () => {
         }
         catch(error) {
             console.error("Error while selecting icon:", error);
+        }
+        finally{
+            hideLoader();
         }
     };
 

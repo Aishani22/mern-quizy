@@ -13,6 +13,7 @@ require("./controllers/news-controller");
 const {updateNews} = require("./controllers/news-controller");
 
 const PORT = process.env.PORT || 3000;
+// const PORT = 3000;
 
 const corsOptions = {
     origin: [
