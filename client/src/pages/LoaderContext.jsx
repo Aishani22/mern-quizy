@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-import Loader from "../components/Loader"; 
+import React, { createContext, useState, useContext } from 'react';
+import Loader from './Loader';
 
 const LoaderContext = createContext();
 
@@ -11,12 +11,10 @@ export function LoaderProvider({ children }) {
 
   return (
     <LoaderContext.Provider value={{ showLoader, hideLoader }}>
-      {loading && <Loader />}
       {children}
+      {loading && <Loader />} {/* Loader appears above all content */}
     </LoaderContext.Provider>
   );
 }
 
-export function useLoader() {
-  return useContext(LoaderContext);
-}
+export const useLoader = () => useContext(LoaderContext);

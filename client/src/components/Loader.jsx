@@ -3,8 +3,8 @@ import "../index.css";
 
 const Loader = () => {
     return (
-    <div className="loader-container">
-      <div className="spinner"></div>
+    <div className="loader-overlay">
+      <div className="loader-spinner"></div>
     </div>
   );
 }
