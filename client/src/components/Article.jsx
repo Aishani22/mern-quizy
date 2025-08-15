@@ -89,10 +89,10 @@ const Article  = ({urlToImage, title, description, url, publishedAt, source}) =>
     {/* Content Column */}
     <div className="w-full md:w-2/3 flex flex-col justify-between text-left relative mx-2">
       <div className="card-body">
-        <h5 className="card-title text-xl font-semibold mb-2 leading-snug">
+        <h5 className="card-title text-xl font-semibold mb-2 leading-snug text-justify">
           {article.title}
         </h5>
-        <p className="mt-2 text-gray-700 text-base leading-relaxed">
+        <p className="mt-2 text-gray-700 text-base leading-relaxed text-justify">
           {article.description || "No description available."}
         </p>
         <a
